@@ -8,7 +8,7 @@ import javax.persistence.*
 data class OrderOption(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
@@ -19,9 +19,33 @@ data class OrderOption(
     val option: Option,
 
     val optionName: String,
-    val unitPrice: Double,
 
     @Column(name = "qty")
-    var quantity: Int,
-    var amount: Double
-) : BaseEntity(LocalDateTime.now())
+    val quantity: Int,
+    val unitPrice: Double,
+    val amount: Double
+) : BaseEntity() {
+    companion object {
+        fun of(
+            order: Order,
+            option: Option,
+            optionName: String,
+            quantity: Int,
+            unitPrice: Double,
+            amount: Double
+        ): OrderOption {
+            val now = LocalDateTime.now()
+            return OrderOption(
+                order = order,
+                option = option,
+                optionName = optionName,
+                quantity = quantity,
+                unitPrice = unitPrice,
+                amount = amount
+            ).apply {
+                createdAt = now
+                updatedAt = now
+            }
+        }
+    }
+}

@@ -4,6 +4,8 @@ import java.time.LocalDateTime
 import javax.persistence.MappedSuperclass
 
 @MappedSuperclass
-abstract class BaseEntity(
-    val createdAt: LocalDateTime
-)
+abstract class BaseEntity {
+    var createdAt: LocalDateTime? = null
+    var updatedAt: LocalDateTime? = null
+    var isDeleted: Boolean = false
+}

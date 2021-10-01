@@ -8,7 +8,7 @@ import javax.persistence.*
 data class Payment(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_option_id")
@@ -18,4 +18,14 @@ data class Payment(
     val paymentMethod: PaymentMethod,
 
     val price: Int
-) : BaseEntity(LocalDateTime.now())
+) : BaseEntity() {
+    companion object {
+        fun of(orderOption: OrderOption, paymentMethod: PaymentMethod, price: Int): Payment {
+            val now = LocalDateTime.now()
+            return Payment(orderOption = orderOption, paymentMethod = paymentMethod, price = price).apply {
+                createdAt = now
+                updatedAt = now
+            }
+        }
+    }
+}

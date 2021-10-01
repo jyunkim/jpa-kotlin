@@ -8,14 +8,38 @@ import javax.persistence.*
 data class Point(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     val member: Member,
 
+    val reason: String?,
+
     val point: Int,
-    val reason: String,
-    var usedPoint: Int = 0,
+    val usedPoint: Int = 0,
+
     val expiredAt: LocalDateTime
-) : BaseEntity(LocalDateTime.now())
+) : BaseEntity() {
+    companion object {
+        fun of(
+            member: Member,
+            reason: String?,
+            point: Int,
+            usedPoint: Int,
+            expiredAt: LocalDateTime
+        ): Point {
+            val now = LocalDateTime.now()
+            return Point(
+                member = member,
+                reason = reason,
+                point = point,
+                usedPoint = usedPoint,
+                expiredAt = expiredAt
+            ).apply {
+                createdAt = now
+                updatedAt = now
+            }
+        }
+    }
+}

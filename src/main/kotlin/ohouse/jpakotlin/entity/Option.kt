@@ -7,7 +7,7 @@ import javax.persistence.*
 data class Option(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
 
     val optionName: String
 )
