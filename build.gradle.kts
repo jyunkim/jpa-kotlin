@@ -4,8 +4,8 @@ plugins {
     id("org.springframework.boot") version "2.5.5"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.5.31"
-    kotlin("plugin.spring") version "1.5.31"
-    kotlin("plugin.jpa") version "1.5.31"
+    kotlin("plugin.spring") version "1.5.31" // allopen을 포함하지만 엔티티에는 적용되지 않음
+    kotlin("plugin.jpa") version "1.5.31" // noarg를 포함
     kotlin("plugin.allopen") version "1.5.31"
 }
 
