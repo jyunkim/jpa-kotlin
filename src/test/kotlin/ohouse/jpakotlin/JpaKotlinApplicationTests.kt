@@ -18,13 +18,13 @@ class JpaKotlinApplicationTests {
     @Test
     @Commit
     fun contextLoads() {
-        val member = Member.of("asdf@gmail.com", "kim")
+        val member = Member.of("asdf@gmail.com", "kim", 22)
         em.persist(member)
 
         val order = Order.of(member, "orderA")
         em.persist(order)
 
-        val option = Option(optionName = "optionA")
+        val option = Option.of("optionA")
         em.persist(option)
 
         val orderOption = OrderOption.of(order, option, "optionA", 2, 100.0, 200.0)
@@ -33,11 +33,22 @@ class JpaKotlinApplicationTests {
         val payment = Payment.of(orderOption, PaymentMethod.CARD, 200)
         em.persist(payment)
 
+        val member1 = em.find(Member::class.java, member.id)
+        println(member1)
+
+        member1.updateInfo("lee", 23)
         em.flush()
         em.clear()
 
-        val member1 = em.find(Member::class.java, member.id)
-        println(member1)
+        val member2 = em.find(Member::class.java, member.id)
+        println(member2)
+
+        member2.remove()
+        em.flush()
+        em.clear()
+
+        val member3 = em.find(Member::class.java, member.id)
+        println(member3)
     }
 
 }
