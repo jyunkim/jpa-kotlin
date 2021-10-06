@@ -5,9 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "members")
-// 양방향 연관관계가 없기 때문에 data class 사용
-// 상속받은 필드는 자동으로 생성되는 메서드에 포함되지 않음
-data class Member(
+class Member(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null, // Id는 save 시 값을 넣어주지 않으므로 nullable 해야 함

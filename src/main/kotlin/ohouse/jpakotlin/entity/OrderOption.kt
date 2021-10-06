@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "order_options")
-data class OrderOption(
+class OrderOption(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,

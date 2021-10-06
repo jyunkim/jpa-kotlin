@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "points")
-data class Point(
+class Point(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
