@@ -1,6 +1,5 @@
 package ohouse.jpakotlin.entity
 
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -19,13 +18,9 @@ class Payment(
 
     val price: Int
 ) : BaseEntity() {
+
     companion object {
-        fun of(orderOption: OrderOption, paymentMethod: PaymentMethod, price: Int): Payment {
-            val now = LocalDateTime.now()
-            return Payment(orderOption = orderOption, paymentMethod = paymentMethod, price = price).apply {
-                createdAt = now
-                updatedAt = now
-            }
-        }
+        fun of(orderOption: OrderOption, paymentMethod: PaymentMethod, price: Int) =
+            Payment(orderOption = orderOption, paymentMethod = paymentMethod, price = price)
     }
 }

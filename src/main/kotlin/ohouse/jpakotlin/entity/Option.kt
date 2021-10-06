@@ -10,4 +10,10 @@ class Option(
     val id: Long? = null,
 
     val optionName: String
-)
+) : BaseEntity() {
+
+    companion object {
+        fun of(optionName: String) =
+            Option(optionName = optionName)
+    }
+}
