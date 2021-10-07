@@ -38,4 +38,14 @@ class Point private constructor(
             return Point(member, reason, point, usedPoint, expiredAt)
         }
     }
+
+    fun usePoint(usedPoint: Int) {
+        try {
+            if (point < usedPoint) throw IllegalArgumentException()
+        } catch (e: IllegalArgumentException) {
+            println("포인트가 부족합니다.")
+        }
+        this.usedPoint = usedPoint
+        point -= usedPoint
+    }
 }
