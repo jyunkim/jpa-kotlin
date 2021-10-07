@@ -1,15 +1,10 @@
 package ohouse.jpakotlin.entity
 
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
 @Table(name = "order_options")
-class OrderOption(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
+class OrderOption private constructor(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     val order: Order,
@@ -20,32 +15,33 @@ class OrderOption(
 
     val optionName: String,
 
-    @Column(name = "qty")
-    val quantity: Int,
-    val unitPrice: Double,
-    val amount: Double
+    quantity: Int,
+    unitPrice: Double,
+    amount: Double
 ) : BaseEntity() {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
+
+    @Column(name = "qty")
+    var quantity: Int = quantity
+        protected set
+    var unitPrice: Double = unitPrice
+        protected set
+    var amount: Double = amount
+        protected set
+
     companion object {
-        fun of(
-            order: Order,
+        fun of(order: Order,
             option: Option,
             optionName: String,
             quantity: Int,
             unitPrice: Double,
-            amount: Double
+            amount: Double? = null
         ): OrderOption {
-            val now = LocalDateTime.now()
-            return OrderOption(
-                order = order,
-                option = option,
-                optionName = optionName,
-                quantity = quantity,
-                unitPrice = unitPrice,
-                amount = amount
-            ).apply {
-                createdAt = now
-                updatedAt = now
-            }
+            val totalPrice = amount ?: (quantity * unitPrice)
+            return OrderOption(order, option, optionName, quantity, unitPrice, totalPrice)
         }
     }
 }
