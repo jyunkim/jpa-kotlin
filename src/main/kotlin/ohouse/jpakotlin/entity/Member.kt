@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "members")
-class Member(
+class Member private constructor(
     @Column(unique = true)
     val email: String,
 

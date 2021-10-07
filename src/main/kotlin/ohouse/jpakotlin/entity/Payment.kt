@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "payments")
-class Payment(
+class Payment private constructor(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
