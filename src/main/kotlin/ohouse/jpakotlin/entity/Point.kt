@@ -34,9 +34,8 @@ class Point private constructor(
             point: Int,
             expiredAt: LocalDateTime,
             usedPoint: Int = 0
-        ): Point {
-            return Point(member, reason, point, usedPoint, expiredAt)
-        }
+        ): Point =
+            Point(member, reason, point, usedPoint, expiredAt)
     }
 
     fun usePoint(usedPoint: Int) {
