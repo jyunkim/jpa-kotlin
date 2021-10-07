@@ -28,7 +28,7 @@ class Member private constructor(
     companion object {
         // 정적 팩토리 메서드
         fun of(email: String, name: String, age: Int) =
-            Member(email = email, name = name, age = age)
+            Member(email, name, age)
     }
 
     fun updateInfo(name: String, age: Int) {

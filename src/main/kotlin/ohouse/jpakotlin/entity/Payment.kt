@@ -5,10 +5,6 @@ import javax.persistence.*
 @Entity
 @Table(name = "payments")
 class Payment private constructor(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_option_id")
     val orderOption: OrderOption,
@@ -19,8 +15,12 @@ class Payment private constructor(
     val price: Int
 ) : BaseEntity() {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
+
     companion object {
         fun of(orderOption: OrderOption, paymentMethod: PaymentMethod, price: Int) =
-            Payment(orderOption = orderOption, paymentMethod = paymentMethod, price = price)
+            Payment(orderOption, paymentMethod, price)
     }
 }

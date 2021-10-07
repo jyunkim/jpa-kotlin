@@ -5,15 +5,15 @@ import javax.persistence.*
 @Entity
 @Table(name = "options")
 class Option private constructor(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
     val optionName: String
 ) : BaseEntity() {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = null
+
     companion object {
         fun of(optionName: String) =
-            Option(optionName = optionName)
+            Option(optionName)
     }
 }
