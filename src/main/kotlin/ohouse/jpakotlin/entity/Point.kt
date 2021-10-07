@@ -39,12 +39,8 @@ class Point private constructor(
     }
 
     fun usePoint(usedPoint: Int) {
-        try {
-            if (point < usedPoint) throw IllegalArgumentException()
-        } catch (e: IllegalArgumentException) {
-            println("포인트가 부족합니다.")
-        }
-        this.usedPoint = usedPoint
+        if (point < usedPoint) throw IllegalArgumentException("포인트가 부족합니다.")
+        this.usedPoint += usedPoint
         point -= usedPoint
     }
 }
