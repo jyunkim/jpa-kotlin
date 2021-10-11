@@ -17,4 +17,9 @@ class ProductCategory private constructor(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
+
+    companion object {
+        fun of(product: Product, category: Category) =
+            ProductCategory(product, category)
+    }
 }
