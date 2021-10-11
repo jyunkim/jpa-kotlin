@@ -1,6 +1,5 @@
 package ohouse.jpakotlin.entity
 
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,7 +24,13 @@ class OrderOptionEntityTest {
         val order = Order.of(member, "orderA")
         em.persist(order)
 
-        val option = Option.of("optionA")
+        val brand = Brand.of("brandA")
+        em.persist(brand)
+
+        val product = Product.of(brand, "productA", 1000)
+        em.persist(product)
+
+        val option = Option.of(product, "optionA", 1000, 10)
         em.persist(option)
 
         val orderOption = OrderOption.of(order, option, "optionA", 1000.0, 2)
@@ -41,6 +46,6 @@ class OrderOptionEntityTest {
 
         val orderOption3 = em.find(OrderOption::class.java, orderOption.id)
         assertThat(orderOption3.quantity).isEqualTo(3)
-        assertThat(orderOption3.amount).isEqualTo(orderOption3.unitPrice * 3)
+        assertThat(orderOption3.totalPrice).isEqualTo(orderOption3.unitPrice * 3)
     }
 }
