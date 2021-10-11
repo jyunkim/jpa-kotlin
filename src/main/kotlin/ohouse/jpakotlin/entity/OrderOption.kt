@@ -17,7 +17,7 @@ class OrderOption private constructor(
 
     val unitPrice: Double,
     quantity: Int,
-    amount: Double
+    totalPrice: Double
 ) : BaseEntity() {
 
     @Id
@@ -27,7 +27,7 @@ class OrderOption private constructor(
     @Column(name = "qty")
     var quantity: Int = quantity
         protected set
-    var amount: Double = amount
+    var totalPrice: Double = totalPrice
         protected set
 
     companion object {
@@ -36,15 +36,17 @@ class OrderOption private constructor(
             optionName: String,
             unitPrice: Double,
             quantity: Int,
-            amount: Double? = null
+            totalPrice: Double? = null
         ): OrderOption {
-            val totalPrice = amount ?: (unitPrice * quantity)
-            return OrderOption(order, option, optionName, unitPrice, quantity, totalPrice)
+            val amount = totalPrice ?: (unitPrice * quantity)
+            option.removeStock(quantity)
+
+            return OrderOption(order, option, optionName, unitPrice, quantity, amount)
         }
     }
 
     fun changeQuantity(quantity: Int) {
         this.quantity = quantity
-        amount = unitPrice * quantity
+        totalPrice = unitPrice * quantity
     }
 }
