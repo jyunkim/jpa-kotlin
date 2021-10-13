@@ -7,20 +7,17 @@ import javax.persistence.*
 class Category private constructor(
     val name: String,
 
-    parent: Category?
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    val parent: Category?
 ) : BaseEntity() {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    var parent: Category? = parent
-        protected set
-
     @OneToMany(mappedBy = "parent")
-    val children: MutableList<Category> = mutableListOf()
+    val children: MutableList<Category> = ArrayList()
 
     companion object {
         fun of(name: String, parent: Category? = null) =
@@ -29,6 +26,5 @@ class Category private constructor(
 
     fun addChildCategory(category: Category) {
         children.add(category)
-        category.parent = this
     }
 }
