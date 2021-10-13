@@ -31,7 +31,7 @@ class Option private constructor(
     }
 
     fun removeStock(quantity: Int) {
-        if (stockQuantity < quantity) throw IllegalArgumentException("재고가 부족합니다.")
+        if (stockQuantity < quantity) throw IllegalStateException("재고가 부족합니다.")
         stockQuantity -= quantity
     }
 }

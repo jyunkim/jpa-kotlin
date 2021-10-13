@@ -51,7 +51,7 @@ class PointEntityTest {
         em.persist(point)
 
         val point1 = em.find(Point::class.java, point.id)
-        assertThrows<IllegalArgumentException> { point1.usePoint(1100) }
+        assertThrows<IllegalStateException> { point1.usePoint(1100) }
         assertThat(point1.point).isEqualTo(1000)
         assertThat(point1.usedPoint).isEqualTo(0)
     }
