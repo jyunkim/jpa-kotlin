@@ -9,6 +9,10 @@ class Product private constructor(
     @JoinColumn(name = "brand_id")
     val brand: Brand,
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    val category: Category,
+
     name: String,
     val price: Int,
     description: String?
@@ -26,8 +30,8 @@ class Product private constructor(
         protected set
 
     companion object {
-        fun of(brand: Brand, name: String, price: Int, description: String? = null) =
-            Product(brand, name, price, description)
+        fun of(brand: Brand, category: Category, name: String, price: Int, description: String? = null) =
+            Product(brand, category, name, price, description)
     }
 
     fun updateName(name: String) {
