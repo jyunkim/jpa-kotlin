@@ -31,7 +31,8 @@ class OrderOption private constructor(
         protected set
 
     companion object {
-        fun of(order: Order,
+        fun of(
+            order: Order,
             option: Option,
             optionName: String,
             unitPrice: Double,

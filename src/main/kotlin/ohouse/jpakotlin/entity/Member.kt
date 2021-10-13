@@ -9,7 +9,12 @@ class Member private constructor(
     val email: String,
 
     name: String,
-    age: Int
+    age: Int,
+
+    phoneNumber: String,
+
+    address: String?,
+    addressDetail: String?
 ) : BaseEntity() {
 
     // Id는 생성자로 받을 필요가 없으므로 빼줌
@@ -25,10 +30,25 @@ class Member private constructor(
     var age: Int = age
         protected set
 
+    var phoneNumber: String = phoneNumber
+        protected set
+
+    var address: String? = address
+        protected set
+    var addressDetail: String? = addressDetail
+        protected set
+
     companion object {
         // 정적 팩토리 메서드
-        fun of(email: String, name: String, age: Int) =
-            Member(email, name, age)
+        fun of(
+            email: String,
+            name: String,
+            age: Int,
+            phoneNumber: String,
+            address: String? = null,
+            addressDetail: String? = null
+        ) =
+            Member(email, name, age, phoneNumber, address, addressDetail)
     }
 
     fun updateInfo(name: String, age: Int) {

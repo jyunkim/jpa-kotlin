@@ -9,7 +9,8 @@ class Order private constructor(
     @JoinColumn(name = "member_id")
     val member: Member,
 
-    val title: String
+    val title: String,
+    val deliveryFee: Int?
 ) : BaseEntity() {
 
     @Id
@@ -17,7 +18,7 @@ class Order private constructor(
     val id: Long? = null
 
     companion object {
-        fun of(member: Member, title: String) =
-            Order(member, title)
+        fun of(member: Member, title: String, deliveryCost: Int?) =
+            Order(member, title, deliveryCost)
     }
 }
