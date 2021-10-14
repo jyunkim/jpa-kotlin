@@ -1,5 +1,5 @@
 package ohouse.jpakotlin.entity
 
 enum class PaymentMethod {
-    CARD, POINT
+    CARD, PHONE, DEPOSIT
 }

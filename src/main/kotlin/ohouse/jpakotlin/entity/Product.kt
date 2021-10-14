@@ -34,15 +34,19 @@ class Product private constructor(
         protected set
 
     companion object {
-        fun of(member: Member, brand: Brand, category: Category, name: String, price: Int, description: String? = null) =
+        fun of(
+            member: Member,
+            brand: Brand,
+            category: Category,
+            name: String,
+            price: Int,
+            description: String? = null
+        ) =
             Product(member, brand, category, name, price, description)
     }
 
-    fun updateName(name: String) {
+    fun updateInfo(name: String, description: String) {
         this.name = name
-    }
-
-    fun updateInfo(description: String) {
         this.description = description
     }
 }

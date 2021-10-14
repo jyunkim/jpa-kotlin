@@ -20,11 +20,10 @@ class Category private constructor(
     val children: MutableList<Category> = ArrayList()
 
     companion object {
-        fun of(name: String, parent: Category? = null) =
-            Category(name, parent)
-    }
-
-    fun addChildCategory(category: Category) {
-        children.add(category)
+        fun of(name: String, parent: Category? = null): Category {
+            val category = Category(name, parent)
+            parent?.children?.add(category)
+            return category
+        }
     }
 }

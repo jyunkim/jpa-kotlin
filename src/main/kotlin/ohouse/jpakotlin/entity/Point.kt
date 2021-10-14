@@ -10,10 +10,11 @@ class Point private constructor(
     @JoinColumn(name = "member_id")
     val member: Member,
 
+    val name: String,
     val reason: String?,
 
-    point: Int,
-    usedPoint: Int,
+    val point: Int,
+    val usedPoint: Int,
 
     val expiredAt: LocalDateTime
 ) : BaseEntity() {
@@ -22,25 +23,15 @@ class Point private constructor(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
-    var point: Int = point
-        protected set
-    var usedPoint: Int = usedPoint
-        protected set
-
     companion object {
         fun of(
             member: Member,
+            name: String,
             reason: String?,
-            point: Int,
             expiredAt: LocalDateTime,
+            point: Int = 0,
             usedPoint: Int = 0
         ): Point =
-            Point(member, reason, point, usedPoint, expiredAt)
-    }
-
-    fun usePoint(amount: Int) {
-        if (point < amount) throw IllegalStateException("포인트가 부족합니다.")
-        usedPoint += amount
-        point -= amount
+            Point(member, name, reason, point, usedPoint, expiredAt)
     }
 }

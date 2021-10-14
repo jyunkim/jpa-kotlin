@@ -3,8 +3,8 @@ package ohouse.jpakotlin.entity
 import javax.persistence.*
 
 @Entity
-@Table(name = "options")
-class Option private constructor(
+@Table(name = "product_options")
+class ProductOption private constructor(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     val product: Product,
@@ -23,7 +23,7 @@ class Option private constructor(
 
     companion object {
         fun of(product: Product, name: String, price: Int, stockQuantity: Int) =
-            Option(product, name, price, stockQuantity)
+            ProductOption(product, name, price, stockQuantity)
     }
 
     fun addStock(quantity: Int) {
