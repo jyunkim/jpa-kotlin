@@ -6,10 +6,6 @@ import javax.persistence.*
 @Table(name = "products")
 class Product private constructor(
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    val member: Member,
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id")
     val brand: Brand,
 
@@ -35,14 +31,13 @@ class Product private constructor(
 
     companion object {
         fun of(
-            member: Member,
             brand: Brand,
             category: Category,
             name: String,
             price: Int,
             description: String? = null
         ) =
-            Product(member, brand, category, name, price, description)
+            Product(brand, category, name, price, description)
     }
 
     fun updateInfo(name: String, description: String) {

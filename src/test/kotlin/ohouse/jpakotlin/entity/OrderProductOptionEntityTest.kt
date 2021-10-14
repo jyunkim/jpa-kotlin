@@ -11,7 +11,7 @@ import javax.persistence.EntityManager
 
 @SpringBootTest
 @Transactional
-class OrderProductEntityTest {
+class OrderProductOptionEntityTest {
 
     @Autowired
     lateinit var em: EntityManager
@@ -29,7 +29,7 @@ class OrderProductEntityTest {
             PaymentMethod.CARD,
             "서울시 강남구"
         )
-        val orderProduct = OrderProduct.of(order, productOption, 1, 0)
+        val orderProduct = OrderProductOption.of(order, productOption, 1, 0)
         productOption.removeStock(1)
         em.persist(order)
         em.persist(orderProduct)
@@ -60,7 +60,6 @@ class OrderProductEntityTest {
         em.persist(category)
 
         val product = Product.of(
-            member,
             brand,
             category,
             "갤럭시s20",
