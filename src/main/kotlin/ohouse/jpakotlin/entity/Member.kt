@@ -50,20 +50,13 @@ class Member private constructor(
             Member(email, password, name, age, phoneNumber, address)
     }
 
-    fun updateInfo(
-        email: String,
-        password: String,
-        name: String,
-        age: Int,
-        phoneNumber: String,
-        address: String?,
-    ) {
-        this.email = email
-        this.password = password
-        this.name = name
-        this.age = age
-        this.phoneNumber = phoneNumber
-        this.address = address
+    fun updateInfo(member: Member) {
+        email = member.email
+        password = member.password
+        name = member.name
+        age = member.age
+        phoneNumber = member.phoneNumber
+        address = member.address
     }
 
     override fun remove() {

@@ -26,7 +26,7 @@ class MemberEntityTest {
         em.persist(member)
 
         val member1 = em.find(Member::class.java, member.id)
-        member1.updateInfo(
+        val newMember = Member.of(
             member1.email,
             member1.password,
             "lee",
@@ -34,6 +34,7 @@ class MemberEntityTest {
             member1.phoneNumber,
             member1.address
         )
+        member1.updateInfo(newMember)
         em.flush()
         em.clear()
 
