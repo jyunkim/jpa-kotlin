@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.annotation.Commit
 import org.springframework.transaction.annotation.Transactional
 import javax.persistence.EntityManager
 
@@ -16,20 +15,29 @@ class MemberEntityTest {
     lateinit var em: EntityManager
 
     @Test
-    @Commit
     fun memberMethodsTest() {
-        val member = Member.of("asdf@gmail.com", "kim", 22)
+        val member = Member.of(
+            "asdf@gmail.com",
+            "1234",
+            "kim",
+            25,
+            "01012341234"
+            )
         em.persist(member)
 
         val member1 = em.find(Member::class.java, member.id)
-        println(member1)
-
-        member1.updateInfo("lee", 23)
+        member1.updateInfo(
+            member1.email,
+            member1.password,
+            "lee",
+            24,
+            member1.phoneNumber,
+            member1.address
+        )
         em.flush()
         em.clear()
 
         val member2 = em.find(Member::class.java, member.id)
-        println(member2)
         assertThat(member2.name).isEqualTo("lee")
         assertThat(member2.updatedAt).isNotEqualTo(member2.createdAt)
 
@@ -38,7 +46,6 @@ class MemberEntityTest {
         em.clear()
 
         val member3 = em.find(Member::class.java, member.id)
-        println(member3)
         assertThat(member3.isRemoved).isTrue
         assertThat(member3.name).isNull()
     }
