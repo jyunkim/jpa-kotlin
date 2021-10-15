@@ -16,4 +16,4 @@
     - MockK
 
 ## 도메인 설계
-![스크린샷 2021-10-14 오후 6 11 47](https://user-images.githubusercontent.com/68456385/137287619-e0be7570-7dfe-4e2e-8cf9-878b5907865e.png)
+![스크린샷 2021-10-15 오전 11 12 20](https://user-images.githubusercontent.com/68456385/137421372-78004fcf-920b-4abe-a9f5-090e90862bcc.png)
