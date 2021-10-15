@@ -33,6 +33,15 @@ dependencies {
 
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // Kotest
+    testImplementation("io.kotest:kotest-runner-junit5:4.6.0")
+    testImplementation("io.kotest:kotest-assertions-core:4.4.3")
+    testImplementation("io.kotest:kotest-extensions-spring:4.4.3")
+
+    // MockK
+    testImplementation("io.mockk:mockk:1.11.0")
+    testImplementation("com.ninja-squad:springmockk:3.0.0")
 }
 
 tasks.withType<KotlinCompile> {
